@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maila Azam | Cloud & DevOps Engineer</title>
+    <meta name="description" content="Portfolio of Maila Azam - IT Student specializing in Cloud Infrastructure, DevOps, and Distributed Systems.">
+    
+    <!-- Google Fonts for minimalist typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for minimalist icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0a0a0c;
+            --surface-color: #141416;
+            --text-primary: #f4f4f5;
+            --text-secondary: #a1a1aa;
+            --accent-color: #3b82f6; /* Subtle tech blue */
+            --accent-glow: rgba(59, 130, 246, 0.5);
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Subtle background grid for that "systems" feel */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { font-weight: 600; line-height: 1.2; }
+        a { color: inherit; text-decoration: none; transition: var(--transition); }
+        .mono { font-family: var(--font-mono); }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 8rem 0;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo { font-family: var(--font-mono); font-weight: 700; font-size: 1.2rem; color: var(--text-primary); }
+        .logo span { color: var(--accent-color); }
+
+        .nav-links a {
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-intro {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            /* 3D Text Effect */
+            text-shadow: 
+                0px 1px 0px #999,
+                0px 2px 0px #888,
+                0px 3px 0px #777,
+                0px 4px 0px #666,
+                0px 5px 0px #555,
+                0px 6px 10px rgba(0,0,0,0.8);
+            transition: var(--transition);
+        }
+
+        .hero h1:hover {
+            text-shadow: 
+                0px 1px 0px #3b82f6,
+                0px 2px 0px #2563eb,
+                0px 3px 0px #1d4ed8,
+                0px 4px 15px rgba(59, 130, 246, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .btn-group { display: flex; gap: 1rem; }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            cursor: pointer;
+            border: 1px solid var(--accent-color);
+            background: transparent;
+            color: var(--accent-color);
+        }
+        .btn:hover { background: rgba(59, 130, 246, 0.1); }
+        .btn-primary { background: var(--accent-color); color: #fff; }
+        .btn-primary:hover { background: #2563eb; box-shadow: 0 0 15px var(--accent-glow); }
+
+        /* --- SECTION TITLES --- */
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-title::after {
+            content: "";
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            flex-grow: 1;
+        }
+
+        /* --- SERVICES / SKILLS GRID (3D BOXES) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--surface-color);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            position: relative;
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+
+        /* Glow effect on hover */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .card:hover::before { opacity: 1; }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            transform: translateZ(30px);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            transform: translateZ(20px);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transform: translateZ(10px);
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 1rem;
+            transform: translateZ(10px);
+        }
+        .card ul li {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+        }
+        .card ul li::before {
+            content: "▹";
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        /* --- EXPERIENCE TIMELINE --- */
+        .timeline {
+            border-left: 2px solid rgba(255,255,255,0.1);
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -2.35rem;
+            top: 0.3rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-role { font-size: 1.2rem; font-weight: 600; }
+        .timeline-company { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem; font-style: italic; }
+        
+        .timeline-details ul {
+            list-style: none;
+        }
+        .timeline-details li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+        .timeline-details li::before {
+            content: "-";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .project-tech {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- SCROLL REVEAL ANIMATION --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; text-shadow: 0px 2px 5px rgba(0,0,0,0.8); }
+            .nav-links { display: none; }
+            .grid { grid-template-columns: 1fr; }
+            section { padding: 5rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">M<span>A</span>_</div>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="hero-intro">Hi, my name is</div>
+            <h1>Maila Azam.</h1>
+            <p>I build resilient, scalable cloud infrastructure and distributed systems. Currently studying IT, focusing on Linux, Networking, and DevOps automation.</p>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="mailto:mailazz26@gmail.com" class="btn">Contact Me</a>
+            </div>
+        </section>
+
+        <!-- SERVICES / SKILLS SECTION -->
+        <section id="services" class="reveal">
+            <h2 class="section-title"><span class="mono">01.</span> Core Services & Skills</h2>
+            <div class="grid">
+                
+                <div class="card tilt">
+                    <div class="card-icon"><i class="fa-solid fa-cloud"></i></div>
+                    <h3>Cloud Infrastructure</h3>
+                    <p>Designing and deploying scalable infrastructure across multiple cloud providers.</p>
+                    <ul>
+                        <li>AWS (EC2, Elastic Beanstalk)</li>
+                        <li>Microsoft Azure</li>
+                        <li>IBM Cloud (IKS)</li>
+                    </ul>
+                </div>
+
+                <div class="card tilt">
+                    <div class="card-icon"><i class="fa-solid fa-infinity"></i></div>
+                    <h3>DevOps & Automation</h3>
+                    <p>Building CI/CD pipelines and automating deployment workflows for high availability.</p>
+                    <ul>
+                        <li>Docker & Kubernetes</li>
+                        <li>Terraform & Ansible</li>
+                        <li>Jenkins & GitHub Actions</li>
+                    </ul>
+                </div>
+
+                <div class="card tilt">
+                    <div class="card-icon"><i class="fa-solid fa-network-wired"></i></div>
+                    <h3>Distributed Systems</h3>
+                    <p>Engineering systems that handle high throughput, concurrency, and fault tolerance.</p>
+                    <ul>
+                        <li>Python & C++</li>
+                        <li>Redis & Message Queues</li>
+                        <li>Multi-threading & Sockets</li>
+                    </ul>
+                </div>
+
+                <div class="card tilt">
+                    <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Observability</h3>
+                    <p>Monitoring system performance and identifying bottlenecks under heavy load.</p>
+                    <ul>
+                        <li>Prometheus & Grafana</li>
+                        <li>Grafana Loki</li>
+                        <li>Performance Benchmarking</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="reveal">
+            <h2 class="section-title"><span class="mono">02.</span> Featured Projects</h2>
+            <div class="grid">
+                
+                <div class="card tilt project-card">
+                    <h3>CloudDeploy</h3>
+                    <p>Designed and deployed a containerized Flask service to Kubernetes. Provisioned infrastructure as code with Terraform. Ran load tests up to 1,000 concurrent requests and published performance metrics.</p>
+                    <div class="project-tech">Docker • Kubernetes • Terraform • Prometheus</div>
+                </div>
+
+                <div class="card tilt project-card">
+                    <h3>MiniOS Simulator</h3>
+                    <p>Implemented process creation, state transitions, and CPU scheduling algorithms (FCFS, Round Robin, SJF). Simulated paging, page-replacement, and producer-consumer synchronization.</p>
+                    <div class="project-tech">C++ • Data Structures • OS Concepts</div>
+                </div>
+
+                <div class="card tilt project-card">
+                    <h3>Distributed Task System</h3>
+                    <p>Built a distributed job-processing platform with an API gateway and worker pools. Implemented task retries, automatic worker-failure recovery, and benchmarked scaling from 1 to 4 workers.</p>
+                    <div class="project-tech">Python • FastAPI • Redis • Docker</div>
+                </div>
+
+                <div class="card tilt project-card">
+                    <h3>NetScan</h3>
+                    <p>Built a concurrent TCP port scanner and host-discovery tool using multithreaded sockets. Added live logging of open ports, response latency, and service fingerprinting.</p>
+                    <div class="project-tech">Python • Sockets • Multithreading</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section id="experience" class="reveal">
+            <h2 class="section-title"><span class="mono">03.</span> Professional Experience</h2>
+            <div class="timeline">
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2025 - 2026</div>
+                    <div class="timeline-role">DevOps Intern</div>
+                    <div class="timeline-company">Moiz Tech Hub, Islamabad</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Designed CI/CD pipelines using Jenkins, Docker, and Kubernetes for automated deployments.</li>
+                            <li>Integrated Prometheus and Grafana for monitoring within Kubernetes clusters.</li>
+                            <li>Provisioned AWS EC2 instances, configured security groups, and optimized compute resources.</li>
+                            <li>Set up centralized log aggregation with Grafana Loki.</li>
+                            <li>Designed a scalable hosting architecture based on Elastic Beanstalk for a growing client.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Previous</div>
+                    <div class="timeline-role">WordPress Intern</div>
+                    <div class="timeline-company">NAVTTC, Islamabad</div>
+                    <div class="timeline-details">
+                        <ul>
+                            <li>Configured and customized WordPress CMS themes, plugins, and SEO tools.</li>
+                            <li>Developed responsive websites functioning correctly across all devices.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="reveal" style="text-align: center;">
+            <h2 class="section-title" style="justify-content: center;"><span class="mono">04.</span> Get In Touch</h2>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem auto;">
+                I am currently seeking a research internship to apply my engineering skills in cloud-native systems and distributed computing. My inbox is always open.
+            </p>
+            <a href="mailto:mailazz26@gmail.com" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">Say Hello</a>
+            
+            <div style="margin-top: 3rem; display: flex; justify-content: center; gap: 2rem; font-size: 1.5rem;">
+                <a href="https://linkedin.com/in/maila-azam" target="_blank" style="color: var(--text-secondary);"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/MailaAzam" target="_blank" style="color: var(--text-secondary);"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Designed & Built by Maila Azam</p>
+        <p style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.5;">© 2026 | Powered by GitHub Pages</p>
+    </footer>
+
+    <!-- JAVASCRIPT FOR 3D EFFECTS & ANIMATIONS -->
+    <script>
+        // 1. Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger once on load
+
+        // 2. 3D Tilt Effect on Cards
+        const cards = document.querySelectorAll('.tilt');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; // x position within the element.
+                const y = e.clientY - rect.top;  // y position within the element.
+                
+                // Calculate rotation (max 10 degrees)
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                
+                // Update the glow position
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+    </script>
+</body>
+</html>
